@@ -23,3 +23,12 @@ export const getPost = async (id) => {
       throw id+error;
     }
   };
+
+  export const deletePostApi = async (id) => {
+    try {
+      const response = await api.delete('/posts/'+id);
+      return response.data;
+    } catch (error) {
+      throw id+error;
+    }
+  };

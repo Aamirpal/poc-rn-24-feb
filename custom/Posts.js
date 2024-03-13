@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { getPosts, getPost } from './api'; // Modify this line to include your API functions
+import { getPosts, getPost, deletePostApi } from './api'; // Modify this line to include your API functions
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Posts = () => {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  const deletePost = async (postId) => {
+    try {
+      await deletePostApi(postId);
+      const result = await getPosts();
+      setData(result);
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -37,6 +48,9 @@ const Posts = () => {
       <Text style={styles.body}>Body: {item.body}</Text>
       <Text style={styles.userId}>User ID: {item.userId}</Text>
       <Text style={styles.id}>ID: {item.id}</Text>
+      <TouchableOpacity onPress={() => deletePost(item.id)} style={styles.deleteButton}>
+        <Icon name="delete" size={24} color="grey" />
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 
