@@ -10,8 +10,7 @@ const Posts = () => {
   const deletePost = async (postId) => {
     try {
       await deletePostApi(postId);
-      const result = await getPosts();
-      setData(result);
+      fetchData();
     } catch (error) {
       console.error('Error deleting data:', error);
     }
