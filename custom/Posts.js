@@ -44,7 +44,7 @@ const Posts = () => {
     <View style={styles.container}>
       {selectedItem ? (
         <View style={styles.selectedItemContainer}>
-          <Text style={styles.selectedItemText}>{selectedItem.title}:</Text>
+          <Text style={styles.selectedItemText}>{selectedItem.name}:</Text>
           <Text style={styles.selectedItemDetails}>{selectedItem.body}</Text>
           {/* You can customize the display of the selected item as needed */}
           <Button title="< back" onPress={() => setSelectedItem(null)} />
